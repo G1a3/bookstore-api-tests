@@ -32,4 +32,37 @@ jobs:
         if: always()
         run: mvn -B allure:report
 
-      # ✅ Deploy Allure HTML to gh-pages (only for m
+      # Deploy Allure report to gh-pages (only on main/master, not PR)
+      - name: Deploy Allure report to GitHub Pages
+        if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: target/site/allure-maven-plugin
+          force_orphan: true
+
+      # Add clickable link in GitHub Actions run Summary
+      - name: Add Allure Report link to job summary
+        if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+        run: |
+          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "👉 https://g1a3.github.io/bookstore-api-tests/" >> $GITHUB_STEP_SUMMARY
+
+      # Optional: keep artifacts too (not required when using Pages)
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
+          if-no-files-found: ignore
+
+      - name: Upload Allure HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
+          if-no-files-found: ignore
