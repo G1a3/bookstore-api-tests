@@ -1,16 +1,12 @@
 package bookstore.utils;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 
 public class DateUtils {
 
-    public static OffsetDateTime nowUtcMillis(){
-        return truncateToMillis(OffsetDateTime.now(ZoneOffset.UTC));
-    }
-
-    public static OffsetDateTime truncateToMillis(OffsetDateTime value) {
+    public static OffsetDateTime truncateToMicros(OffsetDateTime value) {
         if (value == null) return null;
-        return value.withNano((value.getNano() / 1_000_000) * 1_000_000);
+        return value.truncatedTo(ChronoUnit.MICROS);
     }
 }

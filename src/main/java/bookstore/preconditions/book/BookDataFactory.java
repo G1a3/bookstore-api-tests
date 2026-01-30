@@ -25,7 +25,7 @@ public class BookDataFactory {
                 .description(faker.lorem().paragraph(2))
                 .pageCount(ThreadLocalRandom.current().nextInt(1, 1200))
                 .excerpt(faker.lorem().sentence(12))
-                .publishDate(DateUtils.nowUtcMillis())
+                .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class BookDataFactory {
         return BookRequest.builder()
                 .id(ThreadLocalRandom.current().nextInt(1, 1_000_000))
                 .pageCount(ThreadLocalRandom.current().nextInt(1, 1200))
-                .publishDate(DateUtils.nowUtcMillis())
+                .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
                 .build();
     }
 }

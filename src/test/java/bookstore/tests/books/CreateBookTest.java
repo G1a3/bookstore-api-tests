@@ -73,7 +73,7 @@ public class CreateBookTest extends BaseApiTest {
                .description(faker.lorem().paragraph(2))
                .pageCount(ThreadLocalRandom.current().nextInt(1, 1200))
                .excerpt(faker.lorem().sentence(12))
-               .publishDate(DateUtils.nowUtcMillis())
+               .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
                .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
@@ -96,7 +96,7 @@ public class CreateBookTest extends BaseApiTest {
                 .title(faker.book().title())
                 .description(faker.lorem().paragraph(2))
                 .excerpt(faker.lorem().sentence(12))
-                .publishDate(DateUtils.nowUtcMillis())
+                .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
                 .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
