@@ -16,8 +16,6 @@ import net.datafaker.Faker;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -73,7 +71,7 @@ public class CreateBookTest extends BaseApiTest {
                .description(faker.lorem().paragraph(2))
                .pageCount(ThreadLocalRandom.current().nextInt(1, 1200))
                .excerpt(faker.lorem().sentence(12))
-               .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
+               .publishDate(DateUtils.nowUtcMillis())
                .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
@@ -96,7 +94,7 @@ public class CreateBookTest extends BaseApiTest {
                 .title(faker.book().title())
                 .description(faker.lorem().paragraph(2))
                 .excerpt(faker.lorem().sentence(12))
-                .publishDate(DateUtils.truncateToMicros(OffsetDateTime.now(ZoneOffset.UTC)))
+                .publishDate(DateUtils.nowUtcMillis())
                 .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
