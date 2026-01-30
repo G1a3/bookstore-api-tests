@@ -5,6 +5,7 @@ target/
 .kotlin
 
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -14,9 +15,11 @@ target/
 *.ipr
 
 ### Allure
-/allure-results/
-/allure-report/
-EOF
+.allure/
+allure-results/
+allure-report/
+**/allure-results/
+**/allure-report/
 
 ### Eclipse ###
 .apt_generated
