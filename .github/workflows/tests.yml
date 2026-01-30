@@ -46,9 +46,9 @@ jobs:
       - name: Add Allure Report link to job summary
         if: always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         run: |
-          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "## Allure Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "👉 https://g1a3.github.io/bookstore-api-tests/" >> $GITHUB_STEP_SUMMARY
+          echo "https://g1a3.github.io/bookstore-api-tests/" >> $GITHUB_STEP_SUMMARY
 
       # Optional: keep artifacts too (not required when using Pages)
       - name: Upload Allure results
