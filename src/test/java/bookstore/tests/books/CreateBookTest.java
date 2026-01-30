@@ -6,6 +6,7 @@ import bookstore.models.books.BookResponse;
 import bookstore.models.errors.ErrorResponse;
 import bookstore.preconditions.book.BookDataFactory;
 import bookstore.tests.BaseApiTest;
+import bookstore.utils.DateUtils;
 import com.google.inject.Inject;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -72,7 +73,7 @@ public class CreateBookTest extends BaseApiTest {
                .description(faker.lorem().paragraph(2))
                .pageCount(ThreadLocalRandom.current().nextInt(1, 1200))
                .excerpt(faker.lorem().sentence(12))
-               .publishDate(OffsetDateTime.now(ZoneOffset.UTC))
+               .publishDate(DateUtils.nowUtcMillis())
                .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
@@ -95,7 +96,7 @@ public class CreateBookTest extends BaseApiTest {
                 .title(faker.book().title())
                 .description(faker.lorem().paragraph(2))
                 .excerpt(faker.lorem().sentence(12))
-                .publishDate(OffsetDateTime.now(ZoneOffset.UTC))
+                .publishDate(DateUtils.nowUtcMillis())
                 .build();
 
         Response response = booksController.bookPOST(bookRequest, HttpStatus.SC_BAD_REQUEST);
